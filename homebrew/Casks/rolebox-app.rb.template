@@ -1,0 +1,21 @@
+cask "rolebox-app" do
+  arch arm: "arm64", intel: "x64"
+
+  version "__VERSION__"
+  sha256 arm:   "__APP_ARM64_SHA256__",
+         intel: "__APP_X64_SHA256__"
+
+  url "https://github.com/__GITHUB_OWNER__/rolebox/releases/download/v#{version}/Rolebox-macOS-#{arch}.zip"
+  name "Rolebox"
+  desc "Desktop profile manager for Codex, Claude Code, and shared agent contexts"
+  homepage "https://github.com/__GITHUB_OWNER__/rolebox"
+
+  depends_on macos: :monterey
+
+  app "Rolebox.app"
+
+  zap trash: [
+    "~/.config/rolebox",
+    "~/.local/share/rolebox",
+  ]
+end

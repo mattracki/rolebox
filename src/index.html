@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rolebox</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside>
+      <div class="brand">
+        <div class="mark">R</div>
+        <div><strong>Rolebox</strong><span>Local agent contexts</span></div>
+      </div>
+      <p class="section-label">Organizations</p>
+      <nav id="profiles"></nav>
+      <button id="new-profile" class="new-profile"><span>＋</span> New profile</button>
+      <div class="privacy">
+        <span class="lock">●</span>
+        <div><strong>Local only</strong><p>Profiles and paths never leave this Mac.</p></div>
+      </div>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">ACTIVE CONTEXT</p>
+          <h1 id="profile-title">No profiles yet</h1>
+          <p id="profile-subtitle">Your agents, knowledge, and integrations move together.</p>
+        </div>
+        <button id="activate" class="activate">Activate context</button>
+      </header>
+
+      <section class="status-bar">
+        <span class="status-dot"></span>
+        <strong id="status-copy">Create your first profile to get started</strong>
+        <span class="status-note">New agent sessions use this context.</span>
+      </section>
+
+      <section class="launch-grid">
+        <article class="agent-card">
+          <div class="agent-icon codex">◎</div>
+          <div class="agent-copy"><h2>Codex</h2><p id="codex-path"></p></div>
+          <button data-agent="codex">Launch</button>
+        </article>
+        <article class="agent-card">
+          <div class="agent-icon claude">A</div>
+          <div class="agent-copy"><h2>Claude Code</h2><p id="claude-path"></p></div>
+          <button data-agent="claude">Launch</button>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel setup-panel">
+          <div class="panel-heading"><div><p class="eyebrow">CONTEXT BUNDLE</p><h2>Workspace setup</h2></div></div>
+          <label>Obsidian vault <button class="pick" data-field="vaultPath">Choose folder</button></label>
+          <div class="path-row"><span id="vault-path">Not configured</span><button class="open-path" data-open="vaultPath">Open</button></div>
+          <label>Default project folder <button class="pick" data-field="projectPath">Choose folder</button></label>
+          <div class="path-row"><span id="project-path"></span><button class="open-path" data-open="projectPath">Open</button></div>
+          <label>Integrations</label>
+          <div id="integrations" class="chips"></div>
+          <div class="add-integration">
+            <input id="integration-name" placeholder="Google Drive, Jira, Calendar…" />
+            <button id="add-integration">Add</button>
+          </div>
+        </article>
+
+        <article class="panel usage-panel">
+          <div class="panel-heading"><div><p class="eyebrow">LOCAL LOGS</p><h2>Usage</h2></div><button id="refresh-usage" class="refresh">Refresh</button></div>
+          <div class="usage-total"><strong id="usage-total">—</strong><span>tokens observed</span></div>
+          <div class="meter"><i id="input-meter"></i><i id="output-meter"></i><i id="cache-meter"></i></div>
+          <div class="legend">
+            <div><span class="blue"></span><p>Input</p><strong id="usage-input">—</strong></div>
+            <div><span class="purple"></span><p>Output</p><strong id="usage-output">—</strong></div>
+            <div><span class="green"></span><p>Cache</p><strong id="usage-cache">—</strong></div>
+          </div>
+          <p id="usage-note" class="usage-note">Usage appears after sessions are launched through this profile.</p>
+        </article>
+      </section>
+
+      <section class="terminal-panel">
+        <div>
+          <p class="eyebrow">USE ANY TERMINAL</p>
+          <h2>Official CLIs, active context</h2>
+          <p>Normal <code>codex</code> and <code>claude</code> commands use the global profile—or a profile pinned to the current folder.</p>
+        </div>
+        <div class="terminal-actions">
+          <code>rolebox global <span id="terminal-profile">&lt;profile&gt;</span></code>
+          <button id="install-terminal">Install terminal commands</button>
+        </div>
+      </section>
+    </main>
+    <dialog id="profile-dialog">
+      <form method="dialog" id="profile-form">
+        <div class="dialog-heading"><div><p class="eyebrow">NEW CONTEXT</p><h2>Create profile</h2></div><button value="cancel" class="dialog-close">×</button></div>
+        <label class="dialog-label">Organization or role name</label>
+        <input id="profile-name" autofocus placeholder="Client, company, or personal" />
+        <label class="dialog-label">Color</label>
+        <div id="color-options" class="color-options">
+          <button type="button" class="color selected" data-color="#80A8FF" style="--swatch:#80A8FF"></button>
+          <button type="button" class="color" data-color="#67D3B0" style="--swatch:#67D3B0"></button>
+          <button type="button" class="color" data-color="#F2B66D" style="--swatch:#F2B66D"></button>
+          <button type="button" class="color" data-color="#D38BE8" style="--swatch:#D38BE8"></button>
+          <button type="button" class="color" data-color="#F47D82" style="--swatch:#F47D82"></button>
+        </div>
+        <button id="create-profile" value="default">Create profile</button>
+      </form>
+    </dialog>
+    <div id="toast"></div>
+    <script src="renderer.js"></script>
+  </body>
+</html>

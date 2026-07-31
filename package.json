@@ -1,0 +1,37 @@
+{
+  "name": "rolebox",
+  "version": "0.2.0",
+  "private": false,
+  "description": "Local organization profile switcher for Codex, Claude Code, and Obsidian",
+  "main": "src/main.cjs",
+  "bin": {
+    "rolebox": "cli/rolebox.cjs",
+    "rb": "cli/rolebox.cjs"
+  },
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check src/main.cjs && node --check src/preload.cjs && node --check src/renderer.js && node --check scripts/release.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "release": "node scripts/release.cjs",
+    "dist:mac": "npm run dist:mac:arm64",
+    "dist:mac:arm64": "electron-packager . \"Rolebox\" --platform=darwin --arch=arm64 --out=dist --overwrite --prune=true",
+    "dist:mac:x64": "electron-packager . \"Rolebox\" --platform=darwin --arch=x64 --out=dist --overwrite --prune=true"
+  },
+  "devDependencies": {
+    "@electron/packager": "^18.4.4",
+    "electron": "^38.2.0"
+  },
+  "build": {
+    "appId": "com.rolebox.app",
+    "productName": "Rolebox",
+    "files": [
+      "src/**/*",
+      "cli/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": "dir"
+    }
+  }
+}
